@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {View, Text,TextInput, StyleSheet, TouchableOpacity, Modal, KeyboardAvoidingView,ScrollView, Alert} from 'react-native';
 import firebase from 'firebase';
 import db from '../config';
-import SantaAnimation from '../components/SantaClaus';
+// import SantaAnimation from '../components/SantaClaus';
 export default class WelcomeScreen extends Component{
 	constructor(){
 		super();
@@ -20,7 +20,7 @@ export default class WelcomeScreen extends Component{
 						<KeyboardAvoidingView style={styles.KeyboardAvoidingView}>
 							<Text style={styles.modalTitle}>Registration</Text>
 
-							<TextInput style={styles.formTextInput} placeholder ={"First Name"} maxLength ={8}
+							<TextInput style={styles.formTextInput} placeholder ={"First Name"} maxLength ={12}
 								onChangeText={(text)=>{
 					            this.setState({
 					              firstName: text
@@ -28,7 +28,7 @@ export default class WelcomeScreen extends Component{
 					          }}
 					        />
 
-					        <TextInput style={styles.formTextInput} placeholder ={"Last Name"} maxLength ={8}
+					        <TextInput style={styles.formTextInput} placeholder ={"Last Name"} maxLength ={16}
 					          onChangeText={(text)=>{
 					            this.setState({
 					              lastName: text
@@ -143,7 +143,7 @@ export default class WelcomeScreen extends Component{
 		  }
 	} 
 	userLogin= (emailId, password) =>{
-		console.log("Inside userLoginwith "+emailId+" " +password)
+		console.log("Inside userLogin with "+emailId+" " +password)
 		firebase.auth().signInWithEmailAndPassword(emailId,password).then((response)=>{
             //alert("Log in successful!");
             this.props.navigation.navigate('DonateBooks');
@@ -158,7 +158,7 @@ export default class WelcomeScreen extends Component{
 	            	this.showModal()
 	          	}
 				<View style={styles.profileContainer}>
-		          <SantaAnimation/>
+		          {/* <SantaAnimation/> */}
 		          <Text style={styles.title}>Book Santa</Text>
 		        </View>
 		        <KeyboardAvoidingView style={styles.KeyboardAvoidingView}>
@@ -188,7 +188,7 @@ export default class WelcomeScreen extends Component{
 					<View style={styles.buttonContainer}>
 						<TouchableOpacity style={[styles.button,{marginBottom:20, marginTop:20}]}
 						onPress={()=>{this.userLogin(this.state.emailId, this.state.password)}}>
-							<Text>Login In</Text>
+							<Text>Log In</Text>
 						</TouchableOpacity>
 						<TouchableOpacity style={[styles.button]}
 						onPress={()=>this.setState({ isModalVisible:true})}>
