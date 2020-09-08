@@ -4,6 +4,7 @@ import {ListItem,Icon} from 'react-native-elements';
 import firebase from 'firebase';
 import MyHeader from '../components/MyHeader';
 import db from '../config';
+import SwipeableFlatList from '../components/SwipeableFlatList';
 
 
 export default class NotificationScreen extends Component {
@@ -13,15 +14,17 @@ export default class NotificationScreen extends Component {
             userId : firebase.auth().currentUser.email,
             allNotifications : []
         };
-        this.notificationRef = null;
+        // this.notificationRef = null;
     }
     getNotifications=()=>{
+        console.log(this.state.userId);
         this.requestRef = db.collection("all_notifications")
         .where("notification_status", "==", "unread")
-        .where("targeted_user_id",'==',this.state.userId)
+        .where("targetted_user_id",'==',this.state.userId)
         .onSnapshot((snapshot)=>{
             var allNotifications =  [];
             snapshot.docs.map((doc) =>{
+                console.log("here");
                 var notification = doc.data();
                 notification["doc_id"] = doc.id;
                 allNotifications.push(notification);
@@ -34,24 +37,9 @@ export default class NotificationScreen extends Component {
     componentDidMount() {
         this.getNotifications();
     }
-    componentWillUnmount() {
-        this.notificationRef();
-    }
-    keyExtractor=(item,index)=>{index.toString()}
-    renderItem=({item,index})=>{
-        return (
-            <ListItem key={index}
-            leftElement={<Icon name="book" type="font-awesome" color="#696969"/>}
-            title={item.book_name}
-            titleStyle={{
-                color : 'black',
-                fontWeight : 'bold'
-            }}
-            subtitle={item.msg}
-            bottomDivider
-            />
-        )
-    }
+    // componentWillUnmount() {
+    //     this.notificationRef();
+    // }
     render() {
         return (
             <View style={styles.container}>
@@ -67,10 +55,8 @@ export default class NotificationScreen extends Component {
                             </View>
                         )
                         :(
-                            <FlatList
-                            keyExtractor={this.keyExtractor}
-                            data={this.state.allNotifications}
-                            renderItem={this.renderItem}
+                            <SwipeableFlatList
+                            allNotifications={this.state.allNotifications}
                             />
                         )
                     }

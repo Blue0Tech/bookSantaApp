@@ -14,7 +14,7 @@ static navigationOptions = { header: null };
 			userId : firebase.auth().currentUser.email,
 			allDonations : []
 		}
-	this.requestRef= null
+		this.requestRef = null;
 	}
 
 	getAllDonations =()=>{
@@ -39,7 +39,10 @@ static navigationOptions = { header: null };
 			rightElement={
 				<TouchableOpacity style={[styles.button,{
 					backgroundColor : item.request_status === "Book Sent" ? "green" : "#ff5722"
-				}]}>
+				}]}
+				onPress={()=>{
+					this.sendBook(item);
+				}}>
 				<Text style={{color:'#ffff'}}>Send Book</Text>
 				</TouchableOpacity>
 			}
@@ -49,6 +52,7 @@ static navigationOptions = { header: null };
 
 	componentDidMount() {
 		this.getAllDonations();
+		this.getDonorName(this.state.userId);
 	}
 
 	componentWillUnmount() {
@@ -79,19 +83,29 @@ static navigationOptions = { header: null };
 	}
 	sendBook=(bookDetails)=>{
 		if(bookDetails.request_status != "Book Sent") {
-			var requestStatus = "Donor Interested";
-			db.collection("all_donations").doc(bookDetails.doc_id).update({
-				"request_status" : "Donor Interested"
-			});
-			this.sendNotification(bookDetails,requestStatus);
-		}
-		else {
 			var requestStatus = "Book Sent";
-			db.collection("all_donations").doc(bookDetails.doc_id).update({
-				"request_status" : "Book Sent"
+			db.collection("all_donations").where('request_id','==',bookDetails.request_id)
+			.get()
+			.then(snapshot=>{
+				snapshot.forEach(doc=>{
+					db.collection('all_donations').doc(doc.id).update({
+						"request_status" : "Book Sent"
+					});
+				});
+				this.sendNotification(bookDetails,requestStatus);
 			});
-			this.sendNotification(bookDetails,requestStatus);
 		}
+	}
+	getDonorName=(userId)=>{
+		db.collection('users').where('email_id','==',userId).get()
+		.then(snapshot=>{
+			snapshot.forEach(doc=>{
+				console.log("getUserDetails "+doc.data());
+				this.setState({
+					donorName : doc.data().first_name + " " + doc.data().last_name
+				});
+			});
+		});
 	}
 	render(){
 		return(
@@ -135,7 +149,6 @@ button:{
 },
 subtitle :{
 	flex:1,
-	fontSize: 20,
 	justifyContent:'center',
 	alignItems:'center'
 }

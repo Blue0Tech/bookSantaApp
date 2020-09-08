@@ -64,7 +64,7 @@ export default class ReceiverDetailsScreen extends Component {
         });
     }
     addNotification=()=>{
-        var msg = this.state.userName + " has shown interest in donating a book.";
+        var message = this.state.userName + " has shown interest in donating a book.";
         db.collection('all_notifications').add({
             "targetted_user_id" : this.state.receiverId,
             "donor_id" : this.state.userId,
@@ -72,7 +72,7 @@ export default class ReceiverDetailsScreen extends Component {
             "book_name" : this.state.bookName,
             "date" : firebase.firestore.FieldValue.serverTimestamp(),
             "notification_status" : "unread",
-            "msg" : msg
+            "message" : message
         });
     }
     render() {

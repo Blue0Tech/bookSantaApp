@@ -68,7 +68,6 @@ export default class BookDonateScreen extends Component{
 const styles = StyleSheet.create({
 	subContainer:{
 		flex:1,
-		fontSize: 20,
 		justifyContent:'center',
 		alignItems:'center'
 	},
