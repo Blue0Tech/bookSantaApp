@@ -3,7 +3,8 @@ import {View, Text,TouchableOpacity,ScrollView,FlatList,StyleSheet} from 'react-
 import {Card,Icon,ListItem} from 'react-native-elements'
 import MyHeader from '../components/MyHeader.js'
 import firebase from 'firebase';
-import db from '../config.js'
+import db from '../config.js';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 export default class MyDonationScreen extends Component {
 static navigationOptions = { header: null };
@@ -116,7 +117,7 @@ static navigationOptions = { header: null };
 					this.state.allDonations.length === 0
 					?(
 						<View style={styles.subtitle}>
-						<Text style={{ fontSize: 20}}>List of all book Donations</Text>
+						<Text style={{ fontSize: RFValue(20)}}>List of all book Donations</Text>
 						</View>
 					)
 					:(
@@ -135,17 +136,17 @@ static navigationOptions = { header: null };
 
 const styles = StyleSheet.create({
 button:{
-	width:100,
-	height:30,
+	width:RFValue(100),
+	height:RFValue(30),
 	justifyContent:'center',
 	alignItems:'center',
 	backgroundColor:"#ff5722",
 	shadowColor: "#000",
 	shadowOffset: {
 		width: 0,
-		height: 8
+		height: RFValue(8)
 	},
-	elevation : 16
+	elevation : RFValue(16)
 },
 subtitle :{
 	flex:1,

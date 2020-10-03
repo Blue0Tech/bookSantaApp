@@ -4,6 +4,7 @@ import MyHeader from '../components/MyHeader';
 import firebase from 'firebase';
 import 'firebase/auth';
 import db from '../config';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 export default class SettingScreen extends React.Component {
     componentDidMount() {
@@ -52,9 +53,10 @@ export default class SettingScreen extends React.Component {
     }
     render() {
         return (
-            <View style={{alignContent : 'center', marginTop : 30}}>
+            <View style={{alignContent : 'center', marginTop : RFValue(30)}}>
                 <MyHeader title={"Settings"} navigation={this.props.navigation}/>
                 <View style={styles.formContainer}>
+                    <Text style={styles.label}>First name</Text>
                     <TextInput
                         placeholder={"First Name"}
                         value={this.state.firstName}
@@ -109,6 +111,13 @@ export default class SettingScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
+    label : {
+        fontSize : RFValue(18),
+        color : '#717d7e',
+        fontWeight : 'bold',
+        padding : RFValue(10),
+        marginLeft : RFValue(20)
+    },
     container : {
         flex:1,
         alignItems: 'center',
@@ -121,43 +130,43 @@ const styles = StyleSheet.create({
     },
     formTextInput:{
         width:"75%",
-        height:35,
+        height:RFValue(35),
         alignSelf:'center',
         borderColor:'#ffab91',
-        borderRadius:10,
-        borderWidth:1,
-        marginTop:20,
-        padding:10,
+        borderRadius:RFValue(10),
+        borderWidth:RFValue(1),
+        marginTop:RFValue(20),
+        padding:RFValue(10),
     },
     formTextInputMultiLine:{
         width:"75%",
-        minHeight:35,
+        minHeight:RFValue(35),
         alignSelf:'center',
         borderColor:'#ffab91',
-        borderRadius:10,
-        borderWidth:1,
-        marginTop:20,
-        padding:10,
+        borderRadius:RFValue(10),
+        borderWidth:RFValue(1),
+        marginTop:RFValue(20),
+        padding:RFValue(10),
     },
     button:{
         width:"75%",
-        height:50,
+        height:RFValue(50),
         justifyContent:'center',
         alignItems:'center',
-        borderRadius:10,
+        borderRadius:RFValue(10),
         backgroundColor:"#ff5722",
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
-            height: 8,
+            height: RFValue(8),
         },
-        shadowOpacity: 0.44,
-        shadowRadius: 10.32,
-        elevation: 16,
-        marginTop:20
+        shadowOpacity: RFValue(0.44),
+        shadowRadius: RFValue(10.32),
+        elevation: RFValue(16),
+        marginTop:RFValue(20)
     },
     buttonText:{
-        fontSize:25,
+        fontSize:RFValue(25),
         fontWeight:"bold",
         color:"#fff"
     }

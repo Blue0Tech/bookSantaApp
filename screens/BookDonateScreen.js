@@ -5,6 +5,7 @@ import firebase from 'firebase';
 import db from '../config';
 import MyHeader from '../components/MyHeader';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 export default class BookDonateScreen extends Component{
 	componentDidMount() {
@@ -72,15 +73,15 @@ const styles = StyleSheet.create({
 		alignItems:'center'
 	},
 	button:{
-		width:100,
-		height:30,
+		width:RFValue(100),
+		height:RFValue(30),
 		justifyContent:'center',
 		alignItems:'center',
 		backgroundColor:"#ff5722",
 		shadowColor: "#000",
 		shadowOffset: {
 			width: 0,
-			height: 8
+			height: RFValue(8)
 		}
 	}
 });

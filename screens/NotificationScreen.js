@@ -5,6 +5,7 @@ import firebase from 'firebase';
 import MyHeader from '../components/MyHeader';
 import db from '../config';
 import SwipeableFlatList from '../components/SwipeableFlatList';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 
 export default class NotificationScreen extends Component {
@@ -14,11 +15,11 @@ export default class NotificationScreen extends Component {
             userId : firebase.auth().currentUser.email,
             allNotifications : []
         };
-        // this.notificationRef = null;
+        this.notificationRef = null;
     }
     getNotifications=()=>{
         console.log(this.state.userId);
-        this.requestRef = db.collection("all_notifications")
+        this.notificationRef = db.collection("all_notifications")
         .where("notification_status", "==", "unread")
         .where("targetted_user_id",'==',this.state.userId)
         .onSnapshot((snapshot)=>{
@@ -29,17 +30,33 @@ export default class NotificationScreen extends Component {
                 notification["doc_id"] = doc.id;
                 allNotifications.push(notification);
             });
+            console.log(allNotifications);
             this.setState({
                 allNotifications : allNotifications
             });
         });
     }
+    keyExtractor = (item, index) => index.toString()
+    renderItem = ({item,index}) =>{ 
+        return (
+            <ListItem
+            key={index}
+            leftElement={
+                <Icon name="book" type="font-awesome" color ='#696969'/>
+            }
+            title={item.book_name}
+            titleStyle={{ color: 'black', fontWeight: 'bold' }}
+            subtitle={item.message}
+            bottomDivider
+            />
+        )
+    }
     componentDidMount() {
         this.getNotifications();
     }
-    // componentWillUnmount() {
-    //     this.notificationRef();
-    // }
+    componentWillUnmount() {
+        this.notificationRef();
+    }
     render() {
         return (
             <View style={styles.container}>
@@ -51,7 +68,7 @@ export default class NotificationScreen extends Component {
                         this.state.allNotifications.length === 0
                         ?(
                             <View style={{flex : 1,justifyContent : 'center', alignItems : 'center'}}>
-                                <Text style={{fontSize : 25}}>You have no notifications</Text>
+                                <Text style={{fontSize : RFValue(25)}}>You have no notifications</Text>
                             </View>
                         )
                         :(

@@ -3,6 +3,7 @@ import { Header,Icon,Badge } from 'react-native-elements';
 import { View, Text, StyeSheet ,Alert} from 'react-native';
 import db from '../config';
 import * as firebase from 'firebase';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 export default class MyHeader extends Component {
   constructor(props) {
@@ -26,15 +27,15 @@ export default class MyHeader extends Component {
   BellIconWithBadge=()=>{
     return (
       <View>
-        <Icon name='bell' type='font-awesome' color='#696969' size={25} onPress={
+        <Icon name='bell' type='font-awesome' color='#696969' size={RFValue(25)} onPress={
           ()=>{
             this.props.navigation.navigate('Notifications');
           }
         }/>
         <Badge value={this.state.value} containerStyle={{
           position : 'absolute',
-          top : -4,
-          right : -4
+          top : RFValue(-4),
+          right : RFValue(-4)
         }}/>
       </View>
     )
@@ -49,7 +50,7 @@ export default class MyHeader extends Component {
           }
         }/>
       }
-      centerComponent={{ text: this.props.title, style: { color: '#90A5A9', fontSize:20,fontWeight:"bold", } }}
+      centerComponent={{ text: this.props.title, style: { color: '#90A5A9', fontSize:RFValue(20),fontWeight:"bold", } }}
       rightComponent={
         <this.BellIconWithBadge {...this.props}/>
       }

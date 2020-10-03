@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {View, Text,TextInput, StyleSheet, TouchableOpacity, Modal, KeyboardAvoidingView,ScrollView, Alert} from 'react-native';
 import firebase from 'firebase';
 import db from '../config';
+import { RFValue } from 'react-native-responsive-fontsize';
 // import SantaAnimation from '../components/SantaClaus';
 export default class WelcomeScreen extends Component{
 	constructor(){
@@ -124,7 +125,8 @@ export default class WelcomeScreen extends Component{
 		         last_name:this.state.lastName,
 		         contact:this.state.contact,
 		         email_id:this.state.emailId,
-		         address:this.state.address
+				 address:this.state.address,
+				 is_book_request_active:false
 		       })
 		       return  Alert.alert(
 		            'User Added Successfully',
@@ -186,7 +188,7 @@ export default class WelcomeScreen extends Component{
 				</KeyboardAvoidingView>
 
 					<View style={styles.buttonContainer}>
-						<TouchableOpacity style={[styles.button,{marginBottom:20, marginTop:20}]}
+						<TouchableOpacity style={[styles.button,{marginBottom:RFValue(20), marginTop:RFValue(20)}]}
 						onPress={()=>{this.userLogin(this.state.emailId, this.state.password)}}>
 							<Text>Log In</Text>
 						</TouchableOpacity>
@@ -213,19 +215,19 @@ const styles = StyleSheet.create({
    alignItems:'center',
  },
  title :{
-   fontSize:65,
+   fontSize:RFValue(65),
    fontWeight:'300',
-   paddingBottom:30,
+   paddingBottom:RFValue(30),
    color : '#ff3d00'
  },
  loginBox:{
-   width: 300,
-   height: 40,
-   borderBottomWidth: 1.5,
+   width: RFValue(300),
+   height: RFValue(40),
+   borderBottomWidth: RFValue(1.5),
    borderColor : '#ff8a65',
-   fontSize: 20,
-   margin:10,
-   paddingLeft:10
+   fontSize: RFValue(20),
+   margin:RFValue(10),
+   paddingLeft:RFValue(10)
  },
  KeyboardAvoidingView:{
    flex:1,
@@ -235,73 +237,73 @@ const styles = StyleSheet.create({
  modalTitle :{
    justifyContent:'center',
    alignSelf:'center',
-   fontSize:30,
+   fontSize:RFValue(30),
    color:'#ff5722',
-   margin:50
+   margin:RFValue(50)
  },
  modalContainer:{
    flex:1,
-   borderRadius:20,
+   borderRadius:RFValue(20),
    justifyContent:'center',
    alignItems:'center',
    backgroundColor:"#ffff",
-   marginRight:30,
-   marginLeft : 30,
-   marginTop:80,
-   marginBottom:80,
+   marginRight:RFValue(30),
+   marginLeft : RFValue(30),
+   marginTop:RFValue(80),
+   marginBottom:RFValue(80),
  },
  formTextInput:{
    width:"75%",
-   height:35,
+   height:RFValue(35),
    alignSelf:'center',
    borderColor:'#ffab91',
-   borderRadius:10,
-   borderWidth:1,
-   marginTop:20,
-   padding:10
+   borderRadius:RFValue(10),
+   borderWidth:RFValue(1),
+   marginTop:RFValue(20),
+   padding:RFValue(10)
  },
  registerButton:{
-   width:200,
-   height:40,
+   width:RFValue(200),
+   height:RFValue(40),
    alignItems:'center',
    justifyContent:'center',
-   borderWidth:1,
-   borderRadius:10,
-   marginTop:30
+   borderWidth:RFValue(1),
+   borderRadius:RFValue(10),
+   marginTop:RFValue(30)
  },
  registerButtonText:{
    color:'#ff5722',
-   fontSize:15,
+   fontSize:RFValue(15),
    fontWeight:'bold'
  },
  cancelButton:{
-   width:200,
-   height:30,
+   width:RFValue(200),
+   height:RFValue(30),
    justifyContent:'center',
    alignItems:'center',
-   marginTop:5,
+   marginTop:RFValue(5),
  },
 
  button:{
-   width:300,
-   height:50,
+   width:RFValue(300),
+   height:RFValue(50),
    justifyContent:'center',
    alignItems:'center',
-   borderRadius:25,
+   borderRadius:RFValue(25),
    backgroundColor:"#ff9800",
    shadowColor: "#000",
    shadowOffset: {
       width: 0,
-      height: 8,
+      height: RFValue(8),
    },
-   shadowOpacity: 0.30,
-   shadowRadius: 10.32,
-   elevation: 16,
-   padding: 10
+   shadowOpacity: RFValue(0.30),
+   shadowRadius: RFValue(10.32),
+   elevation: RFValue(16),
+   padding: RFValue(10)
  },
  buttonText:{
    color:'#ffff',
    fontWeight:'200',
-   fontSize:20
+   fontSize:RFValue(20)
  }
 })

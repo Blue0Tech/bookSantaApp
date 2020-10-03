@@ -3,6 +3,7 @@ import {Text, View, StyleSheet, TouchableOpacity} from 'react-native';
 import firebase from 'firebase';
 import db from '../config';
 import { Card, Header, Icon } from 'react-native-elements';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 export default class ReceiverDetailsScreen extends Component {
     constructor(props) {
@@ -81,14 +82,14 @@ export default class ReceiverDetailsScreen extends Component {
                 <View style={{flex:0.1}}>
                     <Header
                         leftComponent={<Icon name='arrow-left' type='feather' color='#696969' onPress={()=>{this.props.navigation.goBack()}}/>}
-                        centerComponent={{text : 'Donate books', style : {color : '#90a5a9', fontSize : 20, fontWeight : "bold"}}}
+                        centerComponent={{text : 'Donate books', style : {color : '#90a5a9', fontSize : RFValue(20), fontWeight : "bold"}}}
                         backgroundColor={'#eaf8fe'}
                     />
                 </View>
                 <View style={{flex : 0.3}}>
                     <Card
                         title={"Book information"}
-                        titleStyle={{fontSize : 20}}
+                        titleStyle={{fontSize : RFValue(20)}}
                     >
                         <Card>
                             <Text style={{fontWeight : 'bold'}}>Name : {this.state.bookName}</Text>
@@ -101,7 +102,7 @@ export default class ReceiverDetailsScreen extends Component {
                 <View style={{flex : 0.3}}>
                     <Card
                         title={"Receiver information"}
-                        titleStyle={{fontSize : 20}}
+                        titleStyle={{fontSize : RFValue(20)}}
                     >
                         <Card>
                             <Text style={{fontWeight : 'bold'}}>Name : {this.state.receiverName}</Text>
@@ -146,17 +147,17 @@ const styles = StyleSheet.create({
     alignItems:'center'
   },
   button:{
-    width:200,
-    height:50,
+    width:RFValue(200),
+    height:RFValue(50),
     justifyContent:'center',
     alignItems : 'center',
-    borderRadius: 10,
+    borderRadius: RFValue(10),
     backgroundColor: 'orange',
     shadowColor: "#000",
     shadowOffset: {
        width: 0,
-       height: 8
+       height: RFValue(8)
      },
-    elevation : 16
+    elevation : RFValue(16)
   }
 });
